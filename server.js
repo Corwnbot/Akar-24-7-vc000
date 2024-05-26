@@ -35,7 +35,7 @@ client.login(process.env.t);
 
 client.on('ready', () => {
   setInterval(async () => {
-    client.channels.fetch(`${id}`)
+    client.channels.fetch(process.env.id)
       .then((channel) => {
         const VoiceConnection = joinVoiceChannel({
           channelId: channel.id,
