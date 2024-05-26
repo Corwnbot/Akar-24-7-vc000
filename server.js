@@ -1,14 +1,25 @@
 const http = require('http');
 const express = require('express');
 const app = express();
-app.get('/', function (request, response) {
-  response.sendFile(__dirname + '/web.html');
+
+// Serve static files from the root directory
+app.use(express.static(__dirname));
+
+// Serve the HTML file on the root route
+app.get("/", (request, response) => {
+  response.sendFile('web.html', { root: __dirname });
 });
-const id = process.env.id;
-app.listen(process.env.PORT);
+
+// Start the server on the specified port
+app.listen(process.env.PORT, () => {
+  console.log(`Server is listening on port ${process.env.PORT}`);
+});
+
+// Keep the app alive by pinging itself every 280 seconds
 setInterval(() => {
-  http.get(`/`);
+  http.get(`http://Name-Project.glitch.me/`);
 }, 280000);
+
 
 const { Client } = require('discord.js-selfbot-v13');
 const client = new Client();
